@@ -17,7 +17,6 @@ class Floyds{
                     if((best[u][k] + best[k][v]) < best[u][v]) {
                         best[u][v] = best[u][k] + best[k][v];
                         pred[u][v] = pred[k][v];
-                        pred[v][u] = pred[v][k];
                     }
                 }
             }
