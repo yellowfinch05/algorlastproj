@@ -14,7 +14,6 @@ class Floyds{
         for(int k = 0; k < numTotInts; k++) {
             for(int u = 0; u < numTotInts; u++) {
                 for(int v = 0; v < numTotInts; v++) {
-
                     if((best[u][k] + best[k][v]) < best[u][v]) {
                         best[u][v] = best[u][k] + best[k][v];
                         pred[u][v] = pred[k][v];
@@ -32,11 +31,12 @@ class Floyds{
             double distance = problem[i][2];
 
             for(int j = 0; j < numTotInts; j++) {
-                if((pred[j][(int)from] == to) && myCities.containsKey((int)to)) {
-                    System.out.print(myCities.get((int)to));
-                    System.out.println(best[j][(int)to] - distance);
+                if((pred[j][(int)from] == (int)to)) {
+                    if(myCities.containsKey((int)j)) {
+                        System.out.print(myCities.get((int)j) + " ");
+                        System.out.println(best[(int)from][j] - distance);
+                    }
                 }
-
             }
         }
     }
@@ -66,7 +66,7 @@ class Floyds{
                 weightMatrix[x][y] = dist;
                 weightMatrix[y][x] = dist;
                 predMatrix[x][y] = x;
-                predMatrix[y][x] = x;
+                predMatrix[y][x] = y;
                 scan.nextLine();
             }
             for (int i = 0; i < numTotInts; i++) {
