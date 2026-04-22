@@ -6,14 +6,14 @@ import java.util.HashMap;
 class Floyds{
 
     private static HashMap<Integer, String> myCities = new HashMap<>();
-    private static int n;
+    private static int numTotInts;
     private static int numSigns;
-    private static int numCities;
+    private static int numIntCities;
 
     public static void floydAPSP(double[][] best, int[][] pred, double[][] problem) { //best = weight rows = n
-        for(int k = 0; k < n; k++) {
-            for(int u = 0; u < n; u++) {
-                for(int v = 0; v < n; v++) {
+        for(int k = 0; k < numTotInts; k++) {
+            for(int u = 0; u < numTotInts; u++) {
+                for(int v = 0; v < numTotInts; v++) {
 
                     if((best[u][k] + best[k][v]) < best[u][v]) {
                         best[u][v] = best[u][k] + best[k][v];
@@ -29,7 +29,7 @@ class Floyds{
         for(int i = 0; i < numSigns; i++) {
             double from = problem[i][0];
             double to = problem[i][1];
-            for(int j = 0; j < numCities; j++) {
+            for(int j = 0; j < numIntCities; j++) {
 
             }
         }
@@ -39,9 +39,9 @@ class Floyds{
         File input = new File("input.txt");
         try {
             Scanner scan = new Scanner(input);
-            int numTotInts = Integer.parseInt(scan.next());
+            numTotInts = Integer.parseInt(scan.next());
             int numRds = Integer.parseInt(scan.next());
-            int numIntCities = Integer.parseInt(scan.next());
+            numIntCities = Integer.parseInt(scan.next());
             scan.nextLine();
             double[][] weightMatrix = new double[numTotInts][numTotInts];
             int[][] predMatrix = new int[numTotInts][numTotInts];
@@ -92,7 +92,7 @@ class Floyds{
                 signs[i][2] = dist;
             }
 
-            floydAPSP(weightMatrix, numTotInts, predMatrix, signs, numSigns);
+            floydAPSP(weightMatrix, predMatrix, signs);
 
             scan.close();
         }
