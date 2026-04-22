@@ -26,18 +26,20 @@ class Floyds{
             Scanner scan = new Scanner(input);
             int numTotInts = Integer.parseInt(scan.next());
             int numRds = Integer.parseInt(scan.next());
-            int numIntCities = Integer.parseInt(scan.nextLine());
+            int numIntCities = Integer.parseInt(scan.next());
+            scan.nextLine();
             double[][] weightMatrix = new double[numTotInts][numTotInts];
             HashMap<Integer, String> myCities = new HashMap<>();
 
             for (int i = 0; i < numRds; i++) {
                 int x = Integer.parseInt(scan.next());
                 int y = Integer.parseInt(scan.next());
-                double dist = Integer.parseInt(scan.nextLine());
+                double dist = Double.parseDouble(scan.next());
                 weightMatrix[x][y] = dist;
+                scan.nextLine();
             }
-            for (int i = 0; i < numRds; i++) {
-                for (int j = 0; j < numRds; j++) {
+            for (int i = 0; i < numTotInts; i++) {
+                for (int j = 0; j < numTotInts; j++) {
                     if (weightMatrix[i][j] == 0) {
                         weightMatrix[i][j] = Double.POSITIVE_INFINITY;
                     }
