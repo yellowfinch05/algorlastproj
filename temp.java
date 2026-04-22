@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.HashMap;
 
 public class temp {
 
@@ -12,6 +13,8 @@ public class temp {
             int numRds = Integer.parseInt(scan.next());
             int numIntCities = Integer.parseInt(scan.nextLine());
             double[][] weightMatrix = new double[numTotInts][numTotInts];
+            HashMap<Integer, String> myCities = new HashMap<>();
+
             for (int i = 0; i < numRds; i++) {
                 int x = Integer.parseInt(scan.next());
                 int y = Integer.parseInt(scan.next());
@@ -24,6 +27,12 @@ public class temp {
                         weightMatrix[i][j] = Double.POSITIVE_INFINITY;
                     }
                 }
+            }
+
+            for (int i = 0; i < numIntCities; i++) {
+                int loc = Integer.parseInt(scan.next());
+                String cityName = scan.nextLine();
+                myCities.put(loc, cityName);
             }
 
             scan.close();
