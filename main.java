@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.HashMap;
 
 class Floyds{
-    public static double[][] floydAPSP(double[][] best, int n, int[][] pred) { //best = weight rows = n
+    public static void floydAPSP(double[][] best, int n, int[][] pred, double[][] problem) { //best = weight rows = n
         for(int k = 0; k < n; k++) {
             for(int u = 0; u < n; u++) {
                 for(int v = 0; v < n; v++) {
@@ -16,7 +16,11 @@ class Floyds{
                 }
             }
         }
-        return best;
+        signMaking(best, pred, problem);
+    }
+
+    public static void signMaking(double[][] best, int[][] pred, double[][] problem) {
+
     }
 
     public static void main(String[] args) {
