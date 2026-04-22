@@ -21,7 +21,7 @@ class Floyds{
     }
 
     public static void main(String[] args) {
-        File input = new File("input.txt");
+        File input = new File("input2.txt");
         try {
             Scanner scan = new Scanner(input);
             int numTotInts = Integer.parseInt(scan.next());
