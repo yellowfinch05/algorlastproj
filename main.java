@@ -41,7 +41,12 @@ class Floyds{
             for (int i = 0; i < numTotInts; i++) {
                 for (int j = 0; j < numTotInts; j++) {
                     if (weightMatrix[i][j] == 0) {
-                        weightMatrix[i][j] = Double.POSITIVE_INFINITY;
+                        if (i == j) {
+                            weightMatrix[i][j] = 0;
+                        }
+                        else {
+                            weightMatrix[i][j] = Double.POSITIVE_INFINITY;
+                        }
                     }
                 }
             }
