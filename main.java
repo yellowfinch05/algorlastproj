@@ -29,7 +29,12 @@ class Floyds{
         for(int i = 0; i < numSigns; i++) {
             double from = problem[i][0];
             double to = problem[i][1];
-            for(int j = 0; j < numIntCities; j++) {
+            double distance = problem[i][2];
+            for(int j = 0; j < numTotInts; j++) {
+                if((pred[j][(int)from] == to) && myCities.containsKey((int)to)) {
+                    System.out.print(myCities.get((int)to));
+                    System.out.println(best[j][(int)to] - distance);
+                }
 
             }
         }
@@ -81,7 +86,7 @@ class Floyds{
             }
 
 
-            int numSigns = Integer.parseInt(scan.nextLine());
+            numSigns = Integer.parseInt(scan.nextLine());
             double[][] signs = new double[numSigns][3];
             for (int i = 0; i < numSigns; i++) {
                 int x = Integer.parseInt(scan.next());
