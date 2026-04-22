@@ -30,6 +30,7 @@ class Floyds{
             double from = problem[i][0];
             double to = problem[i][1];
             double distance = problem[i][2];
+
             for(int j = 0; j < numTotInts; j++) {
                 if((pred[j][(int)from] == to) && myCities.containsKey((int)to)) {
                     System.out.print(myCities.get((int)to));
@@ -63,7 +64,9 @@ class Floyds{
                 int y = Integer.parseInt(scan.next());
                 double dist = Double.parseDouble(scan.next());
                 weightMatrix[x][y] = dist;
+                weightMatrix[y][x] = dist;
                 predMatrix[x][y] = x;
+                predMatrix[y][x] = x;
                 scan.nextLine();
             }
             for (int i = 0; i < numTotInts; i++) {
