@@ -68,14 +68,19 @@ class Floyds{
                 myCities.put(loc, cityName);
             }
 
-            double[][] bestMatrix = floydAPSP(weightMatrix, numTotInts, predMatrix);
 
             int numSigns = Integer.parseInt(scan.nextLine());
+            double[][] signs = new double[numSigns][3];
             for (int i = 0; i < numSigns; i++) {
                 int x = Integer.parseInt(scan.next());
                 int y = Integer.parseInt(scan.next());
                 double dist = Double.parseDouble(scan.next());
+                signs[i][0] = x;
+                signs[i][1] = y;
+                signs[i][2] = dist;
             }
+
+            floydAPSP(weightMatrix, numTotInts, predMatrix, signs);
 
             scan.close();
         }
