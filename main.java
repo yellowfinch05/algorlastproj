@@ -31,6 +31,12 @@ class Floyds{
             int[][] predMatrix = new int[numTotInts][numTotInts];
             HashMap<Integer, String> myCities = new HashMap<>();
 
+            for (int i = 0; i < numTotInts; i++) {
+                for (int j = 0; j < numTotInts; j++) {
+                    predMatrix[i][j] = -1;
+                }
+            }
+
             for (int i = 0; i < numRds; i++) {
                 int x = Integer.parseInt(scan.next());
                 int y = Integer.parseInt(scan.next());
