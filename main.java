@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.HashMap;
 
 class Floyds{
-    public static double[][] floydAPSP(double[][] best, int n, char[][] pred) { //best = weight rows = n
+    public static double[][] floydAPSP(double[][] best, int n, int[][] pred) { //best = weight rows = n
         for(int k = 0; k < n; k++) {
             for(int u = 0; u < n; u++) {
                 for(int v = 0; v < n; v++) {
@@ -28,7 +28,7 @@ class Floyds{
             int numIntCities = Integer.parseInt(scan.next());
             scan.nextLine();
             double[][] weightMatrix = new double[numTotInts][numTotInts];
-            char[][] predMatrix = new char[numTotInts][numTotInts];
+            int[][] predMatrix = new int[numTotInts][numTotInts];
             HashMap<Integer, String> myCities = new HashMap<>();
 
             for (int i = 0; i < numRds; i++) {
@@ -36,7 +36,7 @@ class Floyds{
                 int y = Integer.parseInt(scan.next());
                 double dist = Double.parseDouble(scan.next());
                 weightMatrix[x][y] = dist;
-                predMatrix[x][y] = 'x';
+                predMatrix[x][y] = 0;
                 scan.nextLine();
             }
             for (int i = 0; i < numTotInts; i++) {
