@@ -42,7 +42,7 @@ class Floyds{
                 int y = Integer.parseInt(scan.next());
                 double dist = Double.parseDouble(scan.next());
                 weightMatrix[x][y] = dist;
-                predMatrix[x][y] = 0;
+                predMatrix[x][y] = x;
                 scan.nextLine();
             }
             for (int i = 0; i < numTotInts; i++) {
