@@ -20,7 +20,7 @@ class Floyds{
         return best;
     }
 
-    static void main() {
+    public static void main(String[] args) {
         File input = new File("input.txt");
         try {
             Scanner scan = new Scanner(input);
@@ -49,6 +49,8 @@ class Floyds{
                 String cityName = scan.nextLine();
                 myCities.put(loc, cityName);
             }
+
+            double[][] bestMatrix = floydAPSP(weightMatrix, numTotInts);
 
             scan.close();
         }
