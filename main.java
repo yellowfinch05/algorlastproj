@@ -4,8 +4,7 @@ import java.util.Scanner;
 import java.util.HashMap;
 
 class Floyds{
-    public static double[][] floydAPSP(double[][] best, int n) { //best = weight rows = n
-        double[][] pred = new double[n][n];
+    public static double[][] floydAPSP(double[][] best, int n, char[][] pred) { //best = weight rows = n
         for(int k = 0; k < n; k++) {
             for(int u = 0; u < n; u++) {
                 for(int v = 0; v < n; v++) {
@@ -29,6 +28,7 @@ class Floyds{
             int numIntCities = Integer.parseInt(scan.next());
             scan.nextLine();
             double[][] weightMatrix = new double[numTotInts][numTotInts];
+            char[][] predMatrix = new char[numTotInts][numTotInts];
             HashMap<Integer, String> myCities = new HashMap<>();
 
             for (int i = 0; i < numRds; i++) {
@@ -36,6 +36,7 @@ class Floyds{
                 int y = Integer.parseInt(scan.next());
                 double dist = Double.parseDouble(scan.next());
                 weightMatrix[x][y] = dist;
+                predMatrix[x][y] = 'x';
                 scan.nextLine();
             }
             for (int i = 0; i < numTotInts; i++) {
@@ -57,7 +58,14 @@ class Floyds{
                 myCities.put(loc, cityName);
             }
 
-            double[][] bestMatrix = floydAPSP(weightMatrix, numTotInts);
+            double[][] bestMatrix = floydAPSP(weightMatrix, numTotInts, predMatrix);
+
+            int numSigns = Integer.parseInt(scan.nextLine());
+            for (int i = 0; i < numSigns; i++) {
+                int x = Integer.parseInt(scan.next());
+                int y = Integer.parseInt(scan.next());
+                double dist = Double.parseDouble(scan.next());
+            }
 
             scan.close();
         }
