@@ -3,6 +3,14 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.HashMap;
 
+/**
+* This class contains a few static methods and a main input function
+* that are used to solve the problem of making signs on particular roads that give distances to relavant cities
+* The algorithim implements the Floyd Warshall algoritim to this end
+* 
+* @author Janae Lansford and Abby Wurster
+* 
+*/
 class Floyds{
 
     private static HashMap<Integer, String> myCities = new HashMap<>();
