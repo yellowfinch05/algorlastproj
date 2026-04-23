@@ -31,11 +31,10 @@ class Floyds{
             double distance = problem[i][2];
 
             for(int j = 0; j < numTotInts; j++) {
-                if((pred[j][(int)from] == (int)to)) {
-                    if(myCities.containsKey((int)j)) {
-                        System.out.print(myCities.get((int)j) + " ");
-                        System.out.println(best[(int)from][j] - distance);
-                    }
+                if((pred[j][(int)from] == (int)to) && myCities.containsKey((int)j)) {
+                    double signValue = Math.round(best[(int)from][j] - distance);
+                    System.out.print(myCities.get((int)j) + " ");
+                    System.out.println(signValue);
                 }
             }
         }
