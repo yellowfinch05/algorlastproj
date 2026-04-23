@@ -30,13 +30,48 @@ class Floyds{
             double to = problem[i][1];
             double distance = problem[i][2];
 
+            String[] myOutput = new String[numIntCities*2];
+            int v = 0;
             for(int j = 0; j < numTotInts; j++) {
                 if((pred[j][(int)from] == (int)to) && myCities.containsKey((int)j)) {
                     double signValue = Math.round(best[(int)from][j] - distance);
-                    System.out.print(myCities.get((int)j) + " ");
-                    System.out.println((int)signValue);
+                    myOutput[v] = myCities.get((int)j);
+                    myOutput[v+1] = signValue + "";
+                    v += 2;
+                    //System.out.print(myCities.get((int)j) + " ");
+                    //System.out.println((int)signValue);
                 }
             }
+
+            //Double first = Double.POSITIVE_INFINITY;
+            int index = -1;
+            Double temp;
+            for (int m = 0; m < numIntCities; m++) {
+                Double first = Double.POSITIVE_INFINITY;
+                for (int k = 1; k < myOutput.length - 1; k+=2) {
+                    if (myOutput[k] == null) {
+                        // DO NOTHING;
+                    }
+                    else {
+                        temp = Double.parseDouble(myOutput[k]);
+                        if (temp < first) {
+                            first = Double.parseDouble(myOutput[k]);
+                            index = k;
+                        }
+
+                    }
+                    
+                }
+                if (Double.parseDouble(myOutput[index]) != Double.POSITIVE_INFINITY) {
+                    System.out.println(myOutput[index - 1] + " " + myOutput[index]);
+                }
+                
+
+                myOutput[index] = "" + Double.POSITIVE_INFINITY;
+
+            }
+            System.out.println();
+
         }
     }
 
