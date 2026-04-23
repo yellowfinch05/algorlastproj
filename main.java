@@ -67,7 +67,7 @@ class Floyds{
             Double temp;
             for (int m = 0; m < numIntCities; m++) {
                 Double first = Double.POSITIVE_INFINITY;
-                for (int k = 1; k < myOutput.length - 1; k+=2) {
+                for (int k = 1; k <= myOutput.length - 1; k+=2) {
                     if (myOutput[k] == null) {
                         // DO NOTHING;
                     }
@@ -81,16 +81,26 @@ class Floyds{
                     }
                     
                 }
+
+                String spaceString = "";
                 if (Double.parseDouble(myOutput[index]) != Double.POSITIVE_INFINITY) {
-                    System.out.println(myOutput[index - 1] + " " + myOutput[index]);
+                    for (int x = 0; x < 20 - myOutput[index - 1].length(); x++) {
+                        spaceString += " ";
+                    }
+                    System.out.println(myOutput[index - 1] + spaceString + myOutput[index]);
                 }
+
+                /*if (Double.parseDouble(myOutput[index]) != Double.POSITIVE_INFINITY) {
+                    System.out.println(myOutput[index - 1] + " " + myOutput[index]);
+                }*/
                 
 
                 myOutput[index] = "" + Double.POSITIVE_INFINITY;
 
             }
-            System.out.println();
-
+            if (i != numSigns - 1) {
+                System.out.println();
+            }
         }
     }
 
@@ -137,8 +147,9 @@ class Floyds{
 
             for (int i = 0; i < numIntCities; i++) {
                 int loc = Integer.parseInt(scan.next());
-                String cityName = scan.nextLine();
+                String cityName = scan.next();
                 myCities.put(loc, cityName);
+                scan.nextLine();
             }
 
 
