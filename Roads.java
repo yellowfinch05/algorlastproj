@@ -1,12 +1,14 @@
+// Package Project5;
+
 /*
 *
-* This class contains a few static methods and a main input function
-* that are used to solve the problem of making signs on particular roads that give distances to relavant cities
-* The algorithim implements the Floyd Warshall algoritim to this end
-* 
-* @authors: Janae Lansford and Abby Wurster
+* Authors: Janae Lansford and Abby Wurster
 * Date: April 2026
 * File Name: Roads.java
+* Purpose: This class contains a few static methods and a main input function
+* that are used to solve the problem of making signs on particular roads that 
+* give distances to relavant cities. The algorithm implements the Floyd Warshall 
+* algorithm to this end.
 * 
 */
 
@@ -15,7 +17,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.HashMap;
 
-class Floyds{
+public class Roads {
 
     private static HashMap<Integer, String> myCities = new HashMap<>();
     private static int numTotInts;
@@ -23,17 +25,24 @@ class Floyds{
     private static int numIntCities;
 
     /**
-     * This method implements the Floyd Warshall algorithim, which works by gradually updating a matrix that contains
-     * the distances between cities with smaller and smaller values, by trying different subsets of the cities. 
-     * @param best is the weight matrix, this matrix reprsents the initial distances of directly connected cities
-     * @param pred is the predcessor matrix, this matrix represents the second to last city in the route connecting two cities
-     * this value is fairly self evident in the beginning matrix, but is used to kickstart the function
-     * and is updated with more meaningful values within the function
-     * @param problem is an array which contains the problem statement, including which roads need signs, this is simply passed through
-     * @return this function returns nothing officially but passes best, which now contains the shortest distances between cities, 
-     * pred, which contains the last city in the route from one city to another, and the problem statement into the signMaking function
+     * This method implements the Floyd Warshall algorithm, which works by gradually 
+     * updating a matrix that contains the distances between cities with smaller and 
+     * smaller values, by trying different subsets of the cities. 
+     * @param best is the weight matrix, this matrix reprsents the initial distances 
+     * of directly connected cities
+     * @param pred is the predcessor matrix, this matrix represents the second to 
+     * last city in the route connecting two cities this value is fairly self evident 
+     * in the beginning matrix, but is used to kickstart the function and is updated 
+     * with more meaningful values within the function
+     * @param problem is an array which contains the problem statement, including 
+     * which roads need signs, this is simply passed through
+     * @return this function returns nothing officially but passes best, which now 
+     * contains the shortest distances between cities, pred, which contains the last 
+     * city in the route from one city to another, and the problem statement into the 
+     * signMaking function.
      */
-    public static void floydAPSP(double[][] best, int[][] pred, double[][] problem) { //best = weight
+    public static void floydAPSP(double[][] best, int[][] pred, double[][] problem) {
+        // Run Floyd's algorithm
         for(int k = 0; k < numTotInts; k++) {
             for(int u = 0; u < numTotInts; u++) {
                 for(int v = 0; v < numTotInts; v++) {
@@ -47,52 +56,57 @@ class Floyds{
         signMaking(best, pred, problem);
     }
 
-    public static void signMaking(double[][] best, int[][] pred, double[][] problem) {
+    public static void signMaking(double[][] bst, int[][] pred, double[][] problem) {
+        // Print each sign
         for(int i = 0; i < numSigns; i++) {
             double from = problem[i][0];
             double to = problem[i][1];
             double distance = problem[i][2];
-
             String[] myOutput = new String[numIntCities*2];
             int v = 0;
+            
+            // Find which cities to add and their distance
             for(int j = 0; j < numTotInts; j++) {
                 if((pred[j][(int)from] == (int)to) && myCities.containsKey((int)j)) {
-                    double signValue = Math.round(best[(int)from][j] - distance);
+                    double signValue = Math.round(bst[(int)from][j] - distance);
                     myOutput[v] = myCities.get((int)j);
                     myOutput[v+1] = (int)signValue + "";
                     v += 2;
                 }
             }
 
-            //Double first = Double.POSITIVE_INFINITY;
-            int index = -1;
+            int idx = -1;
             Double temp;
+            Double first;
+            String spaceString;
+
+            // Print out cities in order from smallest to largest distance
             for (int m = 0; m < numIntCities; m++) {
-                Double first = Double.POSITIVE_INFINITY;
+                first = Double.POSITIVE_INFINITY;
                 for (int k = 1; k <= myOutput.length - 1; k+=2) {
-                    if (myOutput[k] == null) {
-                        // DO NOTHING;
-                    }
-                    else {
+                    if (myOutput[k] != null) {
                         temp = Double.parseDouble(myOutput[k]);
                         if (temp < first) {
                             first = Double.parseDouble(myOutput[k]);
-                            index = k;
+                            idx = k;
                         }
                     }
                 }
 
-                String spaceString = "";
-                if (Double.parseDouble(myOutput[index]) != Double.POSITIVE_INFINITY) {
-                    for (int x = 0; x < 20 - myOutput[index - 1].length(); x++) {
+                // Format and print each line
+                spaceString = "";
+                if (Double.parseDouble(myOutput[idx]) != Double.POSITIVE_INFINITY) {
+                    for (int x = 0; x < 20 - myOutput[idx - 1].length(); x++) {
                         spaceString += " ";
                     }
-                    System.out.println(myOutput[index - 1] + spaceString + myOutput[index]);
+                    System.out.println(myOutput[idx - 1] + spaceString + 
+                                       myOutput[idx]);
                 }
 
-                myOutput[index] = "" + Double.POSITIVE_INFINITY;
-
+                myOutput[idx] = "" + Double.POSITIVE_INFINITY;
             }
+
+            // Print new line if not at the last sign 
             if (i != numSigns - 1) {
                 System.out.println();
             }
@@ -103,20 +117,24 @@ class Floyds{
         File input = new File("input.txt");
         try {
             Scanner scan = new Scanner(input);
+
+            // Parse initial input
             numTotInts = Integer.parseInt(scan.next());
             int numRds = Integer.parseInt(scan.next());
             numIntCities = Integer.parseInt(scan.next());
             scan.nextLine();
+            
             double[][] weightMatrix = new double[numTotInts][numTotInts];
             int[][] predMatrix = new int[numTotInts][numTotInts];
-            
 
+            // Initialize predecessor matrix
             for (int i = 0; i < numTotInts; i++) {
                 for (int j = 0; j < numTotInts; j++) {
                     predMatrix[i][j] = -1;
                 }
             }
 
+            // Build the weight matrix and predecessor matrix
             for (int i = 0; i < numRds; i++) {
                 int x = Integer.parseInt(scan.next());
                 int y = Integer.parseInt(scan.next());
@@ -127,6 +145,8 @@ class Floyds{
                 predMatrix[y][x] = y;
                 scan.nextLine();
             }
+
+            // Fill in the uninitialized values in the weight matrix
             for (int i = 0; i < numTotInts; i++) {
                 for (int j = 0; j < numTotInts; j++) {
                     if (weightMatrix[i][j] == 0) {
@@ -140,6 +160,7 @@ class Floyds{
                 }
             }
 
+            // Add cities to hashmap
             for (int i = 0; i < numIntCities; i++) {
                 int loc = Integer.parseInt(scan.next());
                 String cityName = scan.next();
@@ -147,7 +168,7 @@ class Floyds{
                 scan.nextLine();
             }
 
-
+            // Build the sign problems requested
             numSigns = Integer.parseInt(scan.nextLine());
             double[][] signs = new double[numSigns][3];
             for (int i = 0; i < numSigns; i++) {
@@ -159,10 +180,12 @@ class Floyds{
                 signs[i][2] = dist;
             }
 
+            // Call the function to solve the problem
             floydAPSP(weightMatrix, predMatrix, signs);
 
             scan.close();
         }
+
         catch (FileNotFoundException e) {
             System.err.println("input file not found");
         }
