@@ -1,16 +1,20 @@
+/*
+*
+* This class contains a few static methods and a main input function
+* that are used to solve the problem of making signs on particular roads that give distances to relavant cities
+* The algorithim implements the Floyd Warshall algoritim to this end
+* 
+* @authors: Janae Lansford and Abby Wurster
+* Date: April 2026
+* File Name: Roads.java
+* 
+*/
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.HashMap;
 
-/**
-* This class contains a few static methods and a main input function
-* that are used to solve the problem of making signs on particular roads that give distances to relavant cities
-* The algorithim implements the Floyd Warshall algoritim to this end
-* 
-* @author Janae Lansford and Abby Wurster
-* 
-*/
 class Floyds{
 
     private static HashMap<Integer, String> myCities = new HashMap<>();
@@ -57,8 +61,6 @@ class Floyds{
                     myOutput[v] = myCities.get((int)j);
                     myOutput[v+1] = (int)signValue + "";
                     v += 2;
-                    //System.out.print(myCities.get((int)j) + " ");
-                    //System.out.println((int)signValue);
                 }
             }
 
@@ -77,9 +79,7 @@ class Floyds{
                             first = Double.parseDouble(myOutput[k]);
                             index = k;
                         }
-
                     }
-                    
                 }
 
                 String spaceString = "";
@@ -89,11 +89,6 @@ class Floyds{
                     }
                     System.out.println(myOutput[index - 1] + spaceString + myOutput[index]);
                 }
-
-                /*if (Double.parseDouble(myOutput[index]) != Double.POSITIVE_INFINITY) {
-                    System.out.println(myOutput[index - 1] + " " + myOutput[index]);
-                }*/
-                
 
                 myOutput[index] = "" + Double.POSITIVE_INFINITY;
 
