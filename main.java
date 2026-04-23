@@ -10,7 +10,18 @@ class Floyds{
     private static int numSigns;
     private static int numIntCities;
 
-    public static void floydAPSP(double[][] best, int[][] pred, double[][] problem) { //best = weight rows = n
+    /**
+     * This method implements the Floyd Warshall algorithim, which works by gradually updating a matrix that contains
+     * the distances between cities with smaller and smaller values, by trying different subsets of the cities. 
+     * @param best is the weight matrix, this matrix reprsents the initial distances of directly connected cities
+     * @param pred is the predcessor matrix, this matrix represents the second to last city in the route connecting two cities
+     * this value is fairly self evident in the beginning matrix, but is used to kickstart the function
+     * and is updated with more meaningful values within the function
+     * @param problem is an array which contains the problem statement, including which roads need signs, this is simply passed through
+     * @return this function returns nothing officially but passes best, which now contains the shortest distances between cities, 
+     * pred, which contains the last city in the route from one city to another, and the problem statement into the signMaking function
+     */
+    public static void floydAPSP(double[][] best, int[][] pred, double[][] problem) { //best = weight
         for(int k = 0; k < numTotInts; k++) {
             for(int u = 0; u < numTotInts; u++) {
                 for(int v = 0; v < numTotInts; v++) {
