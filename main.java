@@ -36,7 +36,7 @@ class Floyds{
                 if((pred[j][(int)from] == (int)to) && myCities.containsKey((int)j)) {
                     double signValue = Math.round(best[(int)from][j] - distance);
                     myOutput[v] = myCities.get((int)j);
-                    myOutput[v+1] = signValue + "";
+                    myOutput[v+1] = (int)signValue + "";
                     v += 2;
                     //System.out.print(myCities.get((int)j) + " ");
                     //System.out.println((int)signValue);
